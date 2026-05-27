@@ -153,7 +153,6 @@ let selectedEvidenceId = null;
 let nativeDragId = null;
 let ignoreEvidenceTapUntil = 0;
 let finalPrizeShown = false;
-let finalGiftViewed = false;
 const sceneMarkers = new Map();
 let sceneQueueControl;
 
@@ -897,10 +896,10 @@ function evaluateFinalOrder(showFailure) {
   finalPrizeShown = true;
   elements.finalFeedback.textContent = "";
   elements.finalFeedback.className = "feedback good";
-  showFinalPrizeIntro(finalGiftViewed);
+  showFinalPrizeIntro();
 }
 
-function showFinalPrizeIntro(showGift = false) {
+function showFinalPrizeIntro() {
   if (document.querySelector(".final-prize-overlay")) return;
 
   const overlay = document.createElement("div");
@@ -908,37 +907,16 @@ function showFinalPrizeIntro(showGift = false) {
   document.body.append(overlay);
 
   const closePrize = () => overlay.remove();
-  const renderGift = () => {
-    finalGiftViewed = true;
-    overlay.innerHTML = `
-      <article class="final-prize-card gift-card">
-        <button class="final-prize-close" type="button" aria-label="Tancar">×</button>
-        <p class="label">Premi desbloquejat</p>
-        <h2>Felicitats</h2>
-        <img class="final-prize-image" src="assets/pastis-nina-23.png" alt="Pastís d'aniversari de la Nina">
-        <p>Torna a casa a bufar espelmes.</p>
-      </article>
-    `;
-    overlay.querySelector(".final-prize-close").addEventListener("click", closePrize);
-  };
-
-  if (showGift) {
-    renderGift();
-    return;
-  }
-
   overlay.innerHTML = `
     <article class="final-prize-card">
       <button class="final-prize-close" type="button" aria-label="Tancar">×</button>
       <h2>Felicitats!</h2>
       <p>Has superat el repte i has resolt totes les pistes del cas.</p>
-      <p>Fes una captura de pantalla de la imatge del regal com a comprovació de premi i envia-la als teus pares.</p>
-      <button class="final-prize-button" type="button">Veure regal</button>
+      <img class="final-prize-image" src="assets/barcelona-92.png" alt="Barcelona 92">
     </article>
   `;
 
   overlay.querySelector(".final-prize-close").addEventListener("click", closePrize);
-  overlay.querySelector(".final-prize-button").addEventListener("click", renderGift);
 }
 
 function ensureLetterOrder() {

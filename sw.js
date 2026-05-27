@@ -1,4 +1,4 @@
-const CACHE_NAME = "expedient-23-v29";
+const CACHE_NAME = "expedient-23-v30";
 const ASSETS = [
   "./",
   "index.html",
@@ -6,6 +6,7 @@ const ASSETS = [
   "app.js",
   "manifest.json",
   "assets/icon.svg",
+  "assets/barcelona-92.png",
   "assets/escultura-sant-jordi.png",
   "assets/marato-hwang-young-jo.png",
   "assets/passeig-fama-pau-gasol.png",
@@ -13,7 +14,6 @@ const ASSETS = [
   "assets/bustia-282.png",
   "assets/jam-session.jpeg",
   "assets/senyal-hotel-7.png",
-  "assets/pastis-nina-23.png",
 ];
 
 self.addEventListener("install", (event) => {
