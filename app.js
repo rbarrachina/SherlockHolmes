@@ -1,7 +1,7 @@
 const RADIUS_METERS = 30;
 const FINAL_KEY = "OLIMPÍADES";
-const STORAGE_KEY = "expedient-23-progress";
-const WELCOME_KEY = "expedient-23-welcome-seen";
+const STORAGE_KEY = "sherlock-holmes-progress";
+const WELCOME_KEY = "sherlock-holmes-welcome-seen";
 const URL_PARAMS = new URLSearchParams(window.location.search);
 const TEST_MODE = URL_PARAMS.get("test") === "1";
 const COMPLETE_TEST_MODE = TEST_MODE && URL_PARAMS.get("complete") === "1";

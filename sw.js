@@ -1,4 +1,4 @@
-const CACHE_NAME = "expedient-23-v31";
+const CACHE_NAME = "sherlock-holmes-v32";
 const ASSETS = [
   "./",
   "index.html",
