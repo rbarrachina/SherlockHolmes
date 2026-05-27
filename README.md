@@ -118,6 +118,14 @@ http://localhost:8000/?test=1
 
 En mode de prova apareix el botó `Localitzar en prova`, que permet obrir cada pista desbloquejada sense haver d’estar físicament a la ubicació.
 
+Per obrir el joc amb totes les pistes completades i provar la pantalla final:
+
+```text
+http://localhost:8000/?test=1&complete=1
+```
+
+Els paràmetres `reset=1`, `test=1` i `complete=1` només funcionen en local (`localhost`, `127.0.0.1` o obrint el fitxer directament). A GitHub Pages s’ignoren, encara que s’afegeixin a la URL.
+
 ## Publicar a GitHub Pages
 
 1. Puja el projecte a un repositori de GitHub.
@@ -138,5 +146,5 @@ https://usuari.github.io/nom-del-repositori/
 - Escriu pistes curtes i concretes.
 - Afegeix més d’una resposta vàlida quan hi pugui haver variants.
 - Prova el joc en un mòbil, amb dades i GPS activats.
-- Fes servir `?test=1` per revisar el flux sense haver de visitar totes les ubicacions.
+- Fes servir `?test=1` en local per revisar el flux sense haver de visitar totes les ubicacions.
 - Canvia el nom a `manifest.json`, `index.html` i `README.md` si reutilitzes la plantilla per a un altre joc.
