@@ -4,7 +4,6 @@ const STORAGE_KEY = "sherlock-holmes-progress";
 const WELCOME_KEY = "sherlock-holmes-welcome-seen";
 const URL_PARAMS = new URLSearchParams(window.location.search);
 const TEST_MODE = URL_PARAMS.get("test") === "1";
-const COMPLETE_TEST_MODE = TEST_MODE && URL_PARAMS.get("complete") === "1";
 const RESET_MODE = URL_PARAMS.get("reset") === "1";
 
 const CASE_CENTER = [41.3715, 2.1487];
@@ -141,7 +140,7 @@ if (RESET_MODE) {
   localStorage.removeItem(WELCOME_KEY);
 }
 
-let progress = COMPLETE_TEST_MODE ? loadCompleteTestProgress() : loadProgress();
+let progress = loadProgress();
 let userPosition = null;
 let selectedSceneId = scenes[0].id;
 let sceneSheetOpen = false;
@@ -1010,7 +1009,6 @@ function isSceneUnlocked(scene) {
 }
 
 function getUnlockedSceneLimit() {
-  if (COMPLETE_TEST_MODE) return scenes.length;
   return Math.min(scenes.length, 2 + progress.completed.length);
 }
 
@@ -1079,14 +1077,6 @@ function loadProgress() {
     // Ignore invalid local state.
   }
   return { completed: [], located: [] };
-}
-
-function loadCompleteTestProgress() {
-  return {
-    completed: scenes.map((scene) => scene.id),
-    located: scenes.map((scene) => scene.id),
-    letterOrder: scenes.map((scene) => scene.id),
-  };
 }
 
 function saveProgress() {
