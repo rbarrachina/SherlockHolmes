@@ -77,7 +77,7 @@ const scenes = [
   {
     id: "formacio",
     number: 6,
-    title: "Formació",
+    title: "Educació física",
     letter: "Í",
     lat: 41.36532012056206,
     lng: 2.1472013822583254,
