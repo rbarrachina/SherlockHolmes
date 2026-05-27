@@ -46,7 +46,7 @@ const scenes = [
     lat: 41.370601338697384,
     lng: 2.152129809730792,
     clue:
-      "Cerca les columnes per sobre de les fonts de la font màgica",
+      "Situa't davant de les columnes situades per sobre de la Font Màgica de Montjuïc",
     question: "Nombre de columnes",
     answers: ["4"],
   },
