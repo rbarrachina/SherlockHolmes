@@ -60,7 +60,7 @@ const scenes = [
     clue:
       "El poble que no és poble",
     question: "Com es diu aquest recinte?",
-    answers: ["Poble Espanyol"],
+    answers: ["Poble Espanyol", "El Poble Espanyol"],
   },
   {
     id: "rocodrom",
