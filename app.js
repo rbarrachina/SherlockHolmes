@@ -1,5 +1,5 @@
 const RADIUS_METERS = 30;
-const FINAL_KEY = "SHERLOCKED";
+const FINAL_KEY = "OLIMPÍADES";
 const STORAGE_KEY = "expedient-23-progress";
 const WELCOME_KEY = "expedient-23-welcome-seen";
 const URL_PARAMS = new URLSearchParams(window.location.search);
@@ -14,7 +14,7 @@ const scenes = [
     id: "escultura-sant-jordi",
     number: 4,
     title: "Escultura",
-    letter: "E",
+    letter: "M",
     lat: 41.36707968799847,
     lng: 2.143807339973487,
     image: "assets/escultura-sant-jordi.png",
@@ -27,7 +27,7 @@ const scenes = [
     id: "pavello",
     number: 1,
     title: "Pavelló",
-    letter: "S",
+    letter: "O",
     lat: 41.37044215762774,
     lng: 2.1502358846699834,
     clue:
@@ -39,7 +39,7 @@ const scenes = [
     id: "columnes",
     number: 2,
     title: "Columnes",
-    letter: "K",
+    letter: "L",
     lat: 41.370601338697384,
     lng: 2.152129809730792,
     clue:
@@ -51,7 +51,7 @@ const scenes = [
     id: "torres",
     number: 3,
     title: "Torres",
-    letter: "R",
+    letter: "I",
     lat: 41.3692405822193,
     lng: 2.1466543595719134,
     clue:
@@ -63,7 +63,7 @@ const scenes = [
     id: "rocodrom",
     number: 5,
     title: "Rocòdrom",
-    letter: "O",
+    letter: "P",
     lat: 41.3653888437957,
     lng: 2.1455105723710433,
     clue:
@@ -75,7 +75,7 @@ const scenes = [
     id: "formacio",
     number: 6,
     title: "Formació",
-    letter: "D",
+    letter: "Í",
     lat: 41.36532012056206,
     lng: 2.1472013822583254,
     clue:
@@ -87,7 +87,7 @@ const scenes = [
     id: "passeig-de-la-fama",
     number: 9,
     title: "Passeig de la fama",
-    letter: "H",
+    letter: "E",
     lat: 41.36616212845405,
     lng: 2.1566507560833665,
     image: "assets/passeig-fama-pau-gasol.png",
@@ -100,7 +100,7 @@ const scenes = [
     id: "comunicacio",
     number: 7,
     title: "Comunicació",
-    letter: "L",
+    letter: "A",
     lat: 41.36446571302771,
     lng: 2.15061053663051,
     clue:
@@ -112,9 +112,10 @@ const scenes = [
     id: "museu",
     number: 10,
     title: "Museu",
-    letter: "C",
+    letter: "S",
     lat: 41.36903641538686,
     lng: 2.15317510651459,
+    image: "assets/museu-mnac.png",
     clue:
       "Aquesta foto està feta des d'un dels miradors més famosos de Montjuïc, davant d'un gran museu amb cúpula i escalinates",
     question: "Escriviu el nom del museu",
@@ -124,7 +125,7 @@ const scenes = [
     id: "marato",
     number: 8,
     title: "Marató",
-    letter: "E",
+    letter: "D",
     lat: 41.36618560979471,
     lng: 2.15505203179402,
     image: "assets/marato-hwang-young-jo.png",

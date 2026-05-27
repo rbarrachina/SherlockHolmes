@@ -4,22 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#16130f">
-    <title>Expedient 23</title>
+    <title>Sherlock Holmes</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/icon.svg">
     <link rel="preconnect" href="https://unpkg.com">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="styles.css?v=76">
+    <link rel="stylesheet" href="styles.css?v=77">
   </head>
   <body>
     <div class="final-prize-overlay welcome-overlay" id="welcomeOverlay">
       <article class="final-prize-card welcome-card">
-        <h2>Hola,</h2>
-        <p>El regal final amagat per Montjuïc.</p>
-        <p>Per trobar-lo hauràs de resoldre 10 enigmes repartits pel mapa. Cada enigma superat et donarà una lletra de la paraula oculta.</p>
-        <p>Quan tinguis totes les lletres, ordena-les correctament i prem <strong>Validar</strong> per desbloquejar el premi final.</p>
-        <p>Activa la ubicació del mapa per poder validar la teva posició i resoldre els enigmes.</p>
+        <p class="welcome-eyebrow">Sherlock Holmes</p>
+        <p class="welcome-lead">Fes de detectiu per Montjuïc.</p>
+        <div class="welcome-steps">
+          <p><span class="step-number">1</span><span>Resol 10 enigmes repartits pel mapa. Cada enigma superat et donarà una lletra de la paraula oculta.</span></p>
+          <p><span class="step-number">2</span><span>Quan tinguis totes les lletres, ordena-les correctament i prem <strong>Validar</strong> per desbloquejar el premi final.</span></p>
+          <p><span class="step-number">3</span><span>Activa la ubicació del mapa per poder validar la teva posició i resoldre els enigmes.</span></p>
+        </div>
         <button class="final-prize-button" id="welcomeStartButton" type="button" onclick="localStorage.setItem('expedient-23-welcome-seen', '1'); this.closest('#welcomeOverlay')?.remove();">Començar</button>
       </article>
     </div>
@@ -27,7 +29,7 @@
       <header class="topbar">
         <div>
           <p class="eyebrow">Cas obert</p>
-          <h1>Expedient 23</h1>
+          <h1>Sherlock Holmes</h1>
         </div>
         <button class="icon-button" id="locateButton" type="button" aria-label="Localitza'm">
           <span aria-hidden="true">⌖</span>
@@ -89,6 +91,6 @@
     </template>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="app.js?v=76"></script>
+    <script src="app.js?v=79"></script>
   </body>
 </html>

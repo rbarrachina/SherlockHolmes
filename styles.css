@@ -493,23 +493,82 @@ p {
 }
 
 .welcome-card {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+  background: #211c15;
   text-align: left;
 }
 
+.welcome-eyebrow {
+  width: fit-content;
+  margin: 0 auto 2px;
+  padding: 6px 10px;
+  border: 1px solid rgba(212, 168, 79, 0.48);
+  border-radius: 999px;
+  color: var(--accent);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
 .welcome-card h2 {
+  margin: 0;
   text-align: center;
+}
+
+.welcome-lead {
+  margin: 0 0 2px;
+  color: var(--ink);
+  font-size: clamp(1.25rem, 5vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.welcome-steps {
+  display: grid;
+  gap: 10px;
+  margin: 2px 0 0;
+}
+
+.welcome-steps p {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  align-items: start;
+  margin: 0;
+  color: rgba(246, 239, 226, 0.82);
+  line-height: 1.42;
+}
+
+.welcome-steps .step-number {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(212, 168, 79, 0.5);
+  border-radius: 50%;
+  background: rgba(212, 168, 79, 0.14);
+  color: var(--accent);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
 }
 
 .final-prize-button {
   width: 100%;
   min-height: 52px;
-  margin-top: 8px;
+  margin-top: 4px;
   border: 0;
   border-radius: 6px;
   background: var(--accent);
   color: #18130a;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-weight: 900;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.28);
 }
 
 .final-prize-image {
@@ -822,6 +881,35 @@ p {
 
   .final-prize-card {
     padding: 16px;
+  }
+
+  .welcome-card {
+    gap: 11px;
+    padding: 18px 16px;
+  }
+
+  .welcome-card h2 {
+    font-size: clamp(2.2rem, 10vw, 2.8rem);
+  }
+
+  .welcome-lead {
+    font-size: clamp(1.15rem, 5vw, 1.42rem);
+  }
+
+  .welcome-steps {
+    gap: 8px;
+  }
+
+  .welcome-steps p {
+    grid-template-columns: 28px 1fr;
+    gap: 9px;
+    font-size: 0.96rem;
+    line-height: 1.35;
+  }
+
+  .welcome-steps .step-number {
+    width: 28px;
+    height: 28px;
   }
 
   .final-prize-image {

@@ -1,4 +1,4 @@
-const CACHE_NAME = "expedient-23-v30";
+const CACHE_NAME = "expedient-23-v31";
 const ASSETS = [
   "./",
   "index.html",
@@ -9,6 +9,7 @@ const ASSETS = [
   "assets/barcelona-92.png",
   "assets/escultura-sant-jordi.png",
   "assets/marato-hwang-young-jo.png",
+  "assets/museu-mnac.png",
   "assets/passeig-fama-pau-gasol.png",
   "assets/finestra-escola.png",
   "assets/bustia-282.png",
