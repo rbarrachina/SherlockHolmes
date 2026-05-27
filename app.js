@@ -886,9 +886,7 @@ function onFinalCheck() {
 }
 
 function evaluateFinalOrder(showFailure) {
-  const answer = progress.letterOrder
-    .map((sceneId) => getSceneById(sceneId)?.letter || "")
-    .join("");
+  const answer = getLetterOrderAnswer(progress.letterOrder);
   if (answer !== FINAL_KEY) {
     if (showFailure) {
       elements.finalFeedback.textContent = "Aquesta no és la paraula correcta.";
@@ -932,11 +930,19 @@ function ensureLetterOrder() {
   let nextSlots = currentSlots.map((sceneId) => (completedIds.includes(sceneId) ? sceneId : null));
 
   newCompleted.forEach((sceneId) => {
-    const emptyIndex = nextSlots.findIndex((slot) => slot === null);
-    if (emptyIndex !== -1) {
-      nextSlots[emptyIndex] = sceneId;
-    }
+    const emptySlots = nextSlots
+      .map((slot, index) => (slot === null ? index : null))
+      .filter((index) => index !== null);
+    if (emptySlots.length === 0) return;
+    const emptyIndex = emptySlots[Math.floor(Math.random() * emptySlots.length)];
+    nextSlots[emptyIndex] = sceneId;
   });
+
+  if (newCompleted.length > 0 && nextSlots.every(Boolean) && getLetterOrderAnswer(nextSlots) === FINAL_KEY) {
+    const firstIndex = Math.floor(Math.random() * nextSlots.length);
+    const secondIndex = (firstIndex + 1) % nextSlots.length;
+    [nextSlots[firstIndex], nextSlots[secondIndex]] = [nextSlots[secondIndex], nextSlots[firstIndex]];
+  }
 
   if (nextSlots.join("|") !== currentSlots.join("|")) {
     progress.letterOrder = nextSlots;
@@ -948,6 +954,12 @@ function normalizeLetterSlots(value) {
   const slots = Array.isArray(value) ? [...value] : [];
   while (slots.length < scenes.length) slots.push(null);
   return slots.slice(0, scenes.length).map((sceneId) => (getSceneById(sceneId) ? sceneId : null));
+}
+
+function getLetterOrderAnswer(slots) {
+  return slots
+    .map((sceneId) => getSceneById(sceneId)?.letter || "")
+    .join("");
 }
 
 function stateLabel(scene, isDone, canOpen) {
