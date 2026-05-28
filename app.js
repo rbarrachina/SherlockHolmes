@@ -321,15 +321,16 @@ function renderProgress() {
 
   for (let index = 0; index < scenes.length; index += 1) {
     const scene = getSceneById(progress.letterOrder[index]);
+    const letter = scene ? getSceneLetter(scene) : "";
     const item = document.createElement("button");
     item.className = `letter ${scene ? "" : "empty"}`;
-    item.textContent = scene?.letter || "·";
+    item.textContent = letter || "·";
     item.type = "button";
     item.dataset.index = String(index);
     if (scene) {
       item.draggable = false;
       item.dataset.id = scene.id;
-      item.setAttribute("aria-label", `Lletra ${scene.letter}`);
+      item.setAttribute("aria-label", `Lletra ${letter}`);
       item.classList.toggle("selected", scene.id === selectedEvidenceId);
     } else {
       item.draggable = false;
@@ -388,7 +389,7 @@ function renderScene(scene) {
   if (isDone) {
     input.disabled = true;
     form.querySelector("button").disabled = true;
-    feedback.textContent = `Evidència validada. Lletra recuperada: ${scene.letter}`;
+    feedback.textContent = `Evidència validada. Lletra recuperada: ${getSceneLetter(scene)}`;
     feedback.className = "feedback good";
   }
 
@@ -542,7 +543,7 @@ function checkSceneAnswer(scene, value, feedback) {
     return;
   }
 
-  showLetterReveal(scene.letter, () => {
+  showLetterReveal(getSceneLetter(scene), () => {
     updateMarker(scene);
     renderSceneQueue();
     syncSceneMarkers();
@@ -958,8 +959,15 @@ function normalizeLetterSlots(value) {
 
 function getLetterOrderAnswer(slots) {
   return slots
-    .map((sceneId) => getSceneById(sceneId)?.letter || "")
+    .map((sceneId) => {
+      const scene = getSceneById(sceneId);
+      return scene ? getSceneLetter(scene) : "";
+    })
     .join("");
+}
+
+function getSceneLetter(scene) {
+  return progress.letterAssignments?.[scene.id] || scene.letter || "";
 }
 
 function stateLabel(scene, isDone, canOpen) {
@@ -1085,24 +1093,81 @@ function loadProgress() {
   try {
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (stored && Array.isArray(stored.completed)) {
-      return {
+      return prepareProgress({
         ...stored,
         located: Array.isArray(stored.located) ? stored.located : [],
-      };
+      });
     }
   } catch {
     // Ignore invalid local state.
   }
-  return { completed: [], located: [] };
+  return prepareProgress({ completed: [], located: [] });
 }
 
 function loadCompleteTestProgress() {
-  const orderedScenes = getScenesByNumber();
+  const letterAssignments = createLetterAssignments();
+  const letterOrder = orderSceneIdsForFinalKey(letterAssignments);
   return {
     completed: scenes.map((scene) => scene.id),
     located: scenes.map((scene) => scene.id),
-    letterOrder: orderedScenes.map((scene) => scene.id),
+    letterAssignments,
+    letterOrder,
   };
+}
+
+function prepareProgress(value) {
+  return {
+    ...value,
+    completed: Array.isArray(value.completed) ? value.completed : [],
+    located: Array.isArray(value.located) ? value.located : [],
+    letterAssignments: normalizeLetterAssignments(value.letterAssignments),
+  };
+}
+
+function normalizeLetterAssignments(value) {
+  const sceneIds = scenes.map((scene) => scene.id);
+  const hasValidAssignments =
+    value &&
+    typeof value === "object" &&
+    sceneIds.every((sceneId) => typeof value[sceneId] === "string" && value[sceneId].length > 0);
+
+  return hasValidAssignments ? value : createLetterAssignments();
+}
+
+function createLetterAssignments() {
+  const orderedScenes = getScenesByNumber();
+  const fallbackLetters = orderedScenes.map((scene) => scene.letter || "");
+  const sourceLetters = [...FINAL_KEY];
+  const baseLetters = sourceLetters.length === orderedScenes.length ? sourceLetters : fallbackLetters;
+  let shuffledLetters = [...baseLetters];
+
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    shuffledLetters = shuffleArray(baseLetters);
+    if (shuffledLetters.join("") !== FINAL_KEY) break;
+  }
+
+  return Object.fromEntries(orderedScenes.map((scene, index) => [scene.id, shuffledLetters[index] || ""]));
+}
+
+function shuffleArray(values) {
+  const shuffled = [...values];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
+function orderSceneIdsForFinalKey(letterAssignments) {
+  const availableScenes = [...scenes];
+  return [...FINAL_KEY]
+    .map((letter) => {
+      const sceneIndex = availableScenes.findIndex((scene) => letterAssignments[scene.id] === letter);
+      if (sceneIndex === -1) return null;
+      const [scene] = availableScenes.splice(sceneIndex, 1);
+      return scene.id;
+    })
+    .filter(Boolean);
 }
 
 function saveProgress() {
